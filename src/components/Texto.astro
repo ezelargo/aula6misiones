@@ -1,0 +1,19 @@
+---
+// Renderiza un texto de src/content/textos/<id>.md
+import { getEntry, render } from 'astro:content';
+
+interface Props {
+  id: string;
+  conTitulo?: boolean; // muestra el título del frontmatter como <h2>
+}
+
+const { id, conTitulo = true } = Astro.props;
+const entrada = await getEntry('textos', id);
+if (!entrada) throw new Error(`No existe src/content/textos/${id}.md`);
+const { Content } = await render(entrada);
+---
+
+{conTitulo && <h2>{entrada.data.titulo}</h2>}
+<div class="texto-markdown">
+  <Content />
+</div>

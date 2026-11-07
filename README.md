@@ -1,29 +1,49 @@
 # aula6misiones
 
-Proyecto de padrinazgo en el Aula N° 6 de El Soberbio, Misiones, Argentina.
+Proyecto de padrinazgo en el Aula Satélite N° 6 de la Escuela N° 120 de El Soberbio, Misiones, Argentina.
 
 Sitio: https://aula6misiones.com.ar
 
-## Estado actual
+Sitio estático hecho con [Astro](https://astro.build). El contenido está en Markdown para
+que cualquier voluntario pueda editarlo desde GitHub, sin saber programar.
 
-Por ahora el dominio redirige a un Google Doc con la información del proyecto.
-El plan es reemplazarlo por un sitio estático (Astro), con el contenido en Markdown
-para que cualquier voluntario pueda editarlo desde GitHub.
+## Editar el contenido
+
+| Qué | Dónde |
+|---|---|
+| Hitos de la historia (texto, videos, galería) | `src/content/historia/*.md` |
+| Textos del sitio (introducción, la maestra, necesidades, objetivos, agradecimientos…) | `src/content/textos/*.md` |
+| Fotos | `src/assets/fotos/<carpeta>/NN.jpg` |
+
+Para agregar fotos a un hito, ponelas en la carpeta indicada en `galeria:` del `.md`,
+numeradas (`01.jpg`, `02.jpg`…). Astro las optimiza automáticamente al compilar.
+
+## Desarrollo local (con Docker, sin instalar Node)
+
+```bash
+docker compose up                          # vista previa en http://localhost:4321
+docker compose run --rm web npm run build  # genera dist/ listo para subir
+docker compose down -v                     # borra contenedor y dependencias
+```
 
 ## Estructura
 
 ```
-public/                        Archivos que se suben tal cual al servidor
-  web.config                   Redirecciones (https, sin www, raíz → Google Doc)
-  index.php                    Respaldo de las redirecciones si falla web.config
+src/
+  content/       Contenido en Markdown (historia y textos)
+  assets/fotos/  Fotos originales (se optimizan al compilar)
+  components/    Galería, visor de fotos, video, texto
+  layouts/       Plantilla general (cabecera, menú, pie)
+  pages/         Páginas: inicio, historia, cómo ayudar, agradecimientos, 404
+  styles/        Estilos globales
+public/          Se copia tal cual al sitio (web.config, favicon)
+dist/            Resultado de la compilación (no se versiona)
 ```
-
-Fase 2: se agrega `src/` con el sitio en Astro; se compila y se sube `dist/`.
 
 ## Deploy
 
-El contenido de `public/` se sube por FTP a la raíz del hosting (IIS).
-**Nunca** commitear credenciales.
+Se compila (`npm run build` en Docker) y se sube el contenido de `dist/` por FTP a la
+raíz del hosting (IIS). **Nunca** commitear credenciales.
 
 No borrar `.well-known/` en el servidor: Let's Encrypt lo usa para renovar el certificado SSL.
 

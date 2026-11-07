@@ -1,0 +1,90 @@
+---
+import '../styles/global.css';
+import Visor from '../components/Visor.astro';
+
+interface Props {
+  titulo?: string;
+  descripcion?: string;
+}
+
+const {
+  titulo,
+  descripcion = 'Proyecto de padrinazgo del Aula Satélite N° 6 de la Escuela N° 120 en El Soberbio, Misiones, Argentina.',
+} = Astro.props;
+
+const nombreSitio = 'Aula Satélite N° 6 · El Soberbio';
+const tituloCompleto = titulo ? `${titulo} | ${nombreSitio}` : nombreSitio;
+const ruta = Astro.url.pathname;
+
+const menu = [
+  { href: '/', texto: 'Inicio' },
+  { href: '/historia/', texto: 'Historia' },
+  { href: '/como-ayudar/', texto: 'Cómo ayudar' },
+  { href: '/agradecimientos/', texto: 'Agradecimientos' },
+];
+---
+
+<!doctype html>
+<html lang="es-AR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{tituloCompleto}</title>
+    <meta name="description" content={descripcion} />
+    <link rel="canonical" href={new URL(ruta, Astro.site)} />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={tituloCompleto} />
+    <meta property="og:description" content={descripcion} />
+    <meta property="og:locale" content="es_AR" />
+  </head>
+  <body>
+    <a class="saltar" href="#contenido">Saltar al contenido</a>
+
+    <header class="cabecera">
+      <div class="contenedor cabecera__fila">
+        <a href="/" class="marca">
+          <span class="marca__numero">6</span>
+          <span class="marca__texto">
+            <strong>Aula Satélite N° 6</strong>
+            <small>El Soberbio · Misiones</small>
+          </span>
+        </a>
+        <nav aria-label="Principal">
+          <ul class="menu">
+            {
+              menu.map((item) => (
+                <li>
+                  <a href={item.href} aria-current={ruta === item.href ? 'page' : undefined}>
+                    {item.texto}
+                  </a>
+                </li>
+              ))
+            }
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <main id="contenido">
+      <slot />
+    </main>
+
+    <footer class="pie">
+      <div class="contenedor pie__fila">
+        <div>
+          <strong>Aula Satélite N° 6 – Escuela N° 120</strong>
+          <p>El Soberbio, Misiones, Argentina. Proyecto sin fines de lucro, en colaboración con <a href="https://apaer.org.ar/">APAER</a>.</p>
+        </div>
+        <div class="pie__legal">
+          <p>
+            Contenido bajo licencia <a href="https://creativecommons.org/licenses/by/4.0/deed.es">CC BY 4.0</a>.
+            Código abierto en <a href="https://github.com/ezelargo/aula6misiones">GitHub</a>.
+          </p>
+        </div>
+      </div>
+    </footer>
+
+    <Visor />
+  </body>
+</html>

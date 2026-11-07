@@ -1,0 +1,88 @@
+---
+import { getCollection, render } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import Galeria from '../components/Galeria.astro';
+import Video from '../components/Video.astro';
+
+const hitos = (await getCollection('historia')).sort((a, b) => a.data.orden - b.data.orden);
+const renderizados = await Promise.all(hitos.map((h) => render(h)));
+
+// El id del archivo (ej. "04-banos") sin el número de orden -> ancla "#banos"
+const ancla = (id: string) => id.replace(/^\d+-/, '');
+---
+
+<Base titulo="Historia" descripcion="La historia del Aula Satélite N° 6 de El Soberbio, Misiones: de un aula de madera construida por los padres a un edificio de material.">
+  <header class="encabezado-pagina">
+    <div class="contenedor">
+      <h1>Historia del aula</h1>
+      <p>Un recorrido en fotos por los momentos que marcaron el camino del Aula Satélite N° 6, desde 2017 hasta hoy.</p>
+    </div>
+  </header>
+
+  <div class="contenedor">
+    <ol class="linea">
+      {
+        hitos.map((h, i) => {
+          const { Content } = renderizados[i];
+          return (
+            <li class="hito" id={ancla(h.id)}>
+              <span class="hito__periodo">{h.data.periodo}</span>
+              <h2>{h.data.titulo}</h2>
+              <div class="texto-markdown">
+                <Content />
+              </div>
+              {h.data.videos.map((v) => <Video id={v.id} titulo={v.titulo} />)}
+              {h.data.galeria && <Galeria carpeta={h.data.galeria} titulo={h.data.titulo} />}
+            </li>
+          );
+        })
+      }
+    </ol>
+  </div>
+</Base>
+
+<style>
+  .linea {
+    list-style: none;
+    margin: 3rem 0;
+    padding: 0 0 0 1.75rem;
+    border-left: 3px solid var(--borde);
+  }
+
+  .hito {
+    position: relative;
+    padding-bottom: 3.5rem;
+    scroll-margin-top: 6rem;
+  }
+
+  .hito::before {
+    content: '';
+    position: absolute;
+    left: calc(-1.75rem - 9px);
+    top: 0.35rem;
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    background: var(--tierra);
+    box-shadow: 0 0 0 4px var(--crema);
+  }
+
+  .hito__periodo {
+    display: inline-block;
+    background: var(--selva-clara);
+    color: var(--selva);
+    font-weight: 700;
+    font-size: 0.9rem;
+    padding: 0.15rem 0.7rem;
+    border-radius: 999px;
+  }
+
+  .hito h2 {
+    margin: 0.5rem 0 0.75rem;
+    font-size: clamp(1.4rem, 2.6vw, 1.9rem);
+  }
+
+  .hito .texto-markdown {
+    max-width: 70ch;
+  }
+</style>
