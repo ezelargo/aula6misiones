@@ -5,6 +5,9 @@ Sitio: https://aula6misiones.com.ar — **el repositorio es público**.
 
 Comunicación con el usuario: en español rioplatense.
 
+**Premisa: no instalar nada sin consentimiento explícito del usuario** (Node, paquetes npm,
+dependencias globales o del proyecto, herramientas). Primero verificar y consultar.
+
 ## Estructura
 
 ```
