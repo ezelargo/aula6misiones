@@ -1,0 +1,48 @@
+---
+import Base from '../layouts/Base.astro';
+import Texto from '../components/Texto.astro';
+---
+
+<Base titulo="Cómo ayudar" descripcion="Necesidades y objetivos del Aula Satélite N° 6 de El Soberbio, Misiones. Conocé cómo podés colaborar.">
+  <header class="encabezado-pagina">
+    <div class="contenedor">
+      <h1>Cómo ayudar</h1>
+      <p>Buscamos fondos y donaciones de forma constante para cubrir las necesidades del aula. Cada aporte, grande o chico, hace la diferencia.</p>
+    </div>
+  </header>
+
+  <section class="seccion">
+    <div class="contenedor dos-columnas" style="align-items: start">
+      <div class="tarjeta">
+        <Texto id="necesidades" />
+      </div>
+      <div class="tarjeta">
+        <Texto id="objetivos" />
+      </div>
+    </div>
+  </section>
+
+  <section class="seccion seccion--selva">
+    <div class="contenedor" style="max-width: 760px; text-align: center">
+      <h2>¿Querés colaborar?</h2>
+      <p>
+        Escribinos para coordinar una donación o sumarte como padrino. Te contamos qué es lo
+        más urgente y cómo hacer llegar tu aporte al aula.
+      </p>
+      <div class="botones" style="justify-content: center">
+        <a class="boton boton--claro" href="https://www.linkedin.com/in/ezelargo/">Contactar por LinkedIn</a>
+        <a class="boton boton--claro" href="https://apaer.org.ar/">Conocer APAER</a>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .tarjeta {
+    background: var(--blanco);
+    border-radius: var(--radio);
+    box-shadow: var(--sombra);
+    padding: 1.75rem;
+    height: 100%;
+  }
+</style>

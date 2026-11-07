@@ -1,0 +1,11 @@
+---
+titulo: Lo que se necesita todo el año
+---
+- Útiles escolares (lapiceras, lápices, cuadernos, hojas, pegamento, fibras, etc.)
+- Delantales para asistir a clase
+- Leche, azúcar y galletitas (los alumnos reciben la merienda de lunes a viernes)
+- Elementos para actividades deportivas
+- Libros, enciclopedias y cuentos infantiles
+- Ropa y zapatillas
+- Elementos de higiene personal
+- Focos de luz y artículos de limpieza para el aula

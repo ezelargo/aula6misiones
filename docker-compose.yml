@@ -1,0 +1,20 @@
+# Entorno de desarrollo: Node y Astro viven solo dentro del contenedor.
+#
+#   docker compose up                              -> vista previa en http://localhost:4321
+#   docker compose run --rm web npm run build      -> genera dist/ para subir por FTP
+#   docker compose down -v                         -> borra contenedor y dependencias
+services:
+  web:
+    image: node:24-alpine
+    working_dir: /app
+    environment:
+      ASTRO_TELEMETRY_DISABLED: "1"
+    volumes:
+      - ./:/app
+      - node_modules:/app/node_modules
+    ports:
+      - "4321:4321"
+    command: sh -c "npm install && npm run dev -- --host 0.0.0.0"
+
+volumes:
+  node_modules:

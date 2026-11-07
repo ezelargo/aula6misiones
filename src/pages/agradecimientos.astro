@@ -1,0 +1,19 @@
+---
+import Base from '../layouts/Base.astro';
+import Texto from '../components/Texto.astro';
+---
+
+<Base titulo="Agradecimientos" descripcion="Las personas y organizaciones que hicieron posible la transformación del Aula Satélite N° 6.">
+  <header class="encabezado-pagina">
+    <div class="contenedor">
+      <h1>Gracias 🧡</h1>
+      <p>Nada de esto hubiera sido posible sin cada persona que se sumó.</p>
+    </div>
+  </header>
+
+  <section class="seccion">
+    <div class="contenedor" style="max-width: 760px">
+      <Texto id="agradecimientos" conTitulo={false} />
+    </div>
+  </section>
+</Base>

@@ -1,0 +1,255 @@
+---
+import { Image } from 'astro:assets';
+import Base from '../layouts/Base.astro';
+import Texto from '../components/Texto.astro';
+import { foto } from '../lib/fotos';
+
+const portada = foto('portada', 1);
+
+const datos = [
+  { numero: '2019', texto: 'año en que comenzó el padrinazgo' },
+  { numero: '~40', texto: 'encomiendas enviadas entre 2019 y 2022' },
+  { numero: '22', texto: 'alumnos de 5 a 13 años (marzo 2024)' },
+  { numero: '1', texto: 'maestra para todos los grados' },
+];
+
+const logros = [
+  { titulo: 'Baños de material', periodo: '2022 – 2023', img: foto('banos', 3), ancla: 'banos' },
+  { titulo: 'Nueva aula de material', periodo: '2023 – 2024', img: foto('aula', 35), ancla: 'aula' },
+  { titulo: 'Sillas, mesas y biblioteca', periodo: '2024', img: foto('mobiliario', 5), ancla: 'mobiliario' },
+  { titulo: 'Aire acondicionado', periodo: '2025', img: foto('aire-acondicionado', 2), ancla: 'aire-acondicionado' },
+];
+---
+
+<Base>
+  <!-- Portada -->
+  <section class="portada">
+    <Image src={portada} alt="La nueva aula de material del Aula Satélite N° 6" widths={[800, 1600]} sizes="100vw" format="webp" loading="eager" class="portada__img" />
+    <div class="portada__capa">
+      <div class="contenedor">
+        <span class="portada__lugar">Escuela N° 120 · El Soberbio, Misiones</span>
+        <h1>Padrinazgo del Aula Satélite N° 6</h1>
+        <p>
+          Una escuela rural que, gracias a padrinos y donantes, pasó de un aula de madera
+          levantada por las familias a un edificio de material.
+        </p>
+        <div class="botones">
+          <a class="boton" href="/como-ayudar/">Quiero ayudar</a>
+          <a class="boton boton--claro" href="/historia/">Ver la historia</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Datos -->
+  <section class="datos">
+    <div class="contenedor">
+      <ul class="datos__lista">
+        {
+          datos.map((d) => (
+            <li>
+              <strong>{d.numero}</strong>
+              <span>{d.texto}</span>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
+
+  <!-- Introducción -->
+  <section class="seccion">
+    <div class="contenedor dos-columnas">
+      <div>
+        <span class="etiqueta">El proyecto</span>
+        <Texto id="introduccion" />
+      </div>
+      <div>
+        <Texto id="aula-satelite" />
+      </div>
+    </div>
+  </section>
+
+  <!-- Ubicación -->
+  <section class="seccion seccion--arena">
+    <div class="contenedor dos-columnas">
+      <Image src={foto('ubicacion', 1)} alt="Mapa con el recorrido entre El Soberbio, la Escuela N° 120 y el Aula Satélite N° 6" widths={[560, 1100]} sizes="(min-width: 820px) 540px, 100vw" format="webp" class="foto-redondeada" />
+      <div>
+        <span class="etiqueta">Ubicación</span>
+        <Texto id="ubicacion" />
+        <div class="botones">
+          <a class="boton" href="https://goo.gl/maps/e7cmjMtn4M4RMqEt6">Ver en Google Maps</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Logros -->
+  <section class="seccion">
+    <div class="contenedor">
+      <span class="etiqueta">Lo que logramos juntos</span>
+      <h2>De un aula de madera a un edificio de material</h2>
+      <ul class="logros">
+        {
+          logros.map((l) => (
+            <li>
+              <a href={`/historia/#${l.ancla}`}>
+                <Image src={l.img} alt={l.titulo} widths={[400, 700]} sizes="(min-width: 820px) 260px, 90vw" format="webp" />
+                <span class="logros__periodo">{l.periodo}</span>
+                <strong>{l.titulo}</strong>
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+      <div class="botones">
+        <a class="boton" href="/historia/">Ver toda la historia</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- La maestra -->
+  <section class="seccion seccion--arena">
+    <div class="contenedor dos-columnas">
+      <div>
+        <span class="etiqueta">El corazón del aula</span>
+        <Texto id="maestra" />
+      </div>
+      <Image src={foto('portada', 2)} alt="Cartel de bienvenida del Aula Satélite N° 6, Escuela N° 120, Cristal 3" widths={[560, 1100]} sizes="(min-width: 820px) 540px, 100vw" format="webp" class="foto-redondeada" />
+    </div>
+  </section>
+
+  <!-- Rol del padrino -->
+  <section class="seccion">
+    <div class="contenedor" style="max-width: 820px">
+      <span class="etiqueta">Padrinazgo</span>
+      <Texto id="rol-padrino" />
+    </div>
+  </section>
+
+  <!-- Llamado a la acción -->
+  <section class="seccion seccion--selva">
+    <div class="contenedor" style="text-align: center">
+      <h2>Todavía hay mucho por hacer</h2>
+      <p>Agua potable, un comedor y lo que los chicos necesitan todos los días. Cada aporte suma.</p>
+      <div class="botones" style="justify-content: center">
+        <a class="boton boton--claro" href="/como-ayudar/">Cómo ayudar</a>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .portada {
+    position: relative;
+    min-height: min(78vh, 640px);
+    display: grid;
+    color: #fff;
+  }
+
+  .portada__img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .portada__capa {
+    position: relative;
+    display: flex;
+    align-items: flex-end;
+    padding: 4rem 0 3rem;
+    background: linear-gradient(to top, rgb(20 15 10 / 0.85), rgb(20 15 10 / 0.25) 60%, transparent);
+  }
+
+  .portada h1 {
+    color: #fff;
+    font-size: clamp(2.2rem, 5.5vw, 3.6rem);
+    margin: 0.3rem 0 0.8rem;
+    max-width: 16ch;
+  }
+
+  .portada p {
+    max-width: 52ch;
+    font-size: 1.15rem;
+    margin: 0;
+  }
+
+  .portada__lugar {
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    opacity: 0.9;
+  }
+
+  .datos {
+    background: var(--tierra);
+    color: #fff;
+    padding: 1.75rem 0;
+  }
+
+  .datos__lista {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.25rem;
+  }
+
+  .datos__lista strong {
+    display: block;
+    font-size: 2.2rem;
+    line-height: 1;
+  }
+
+  .datos__lista span {
+    opacity: 0.92;
+    font-size: 0.95rem;
+  }
+
+  .logros {
+    list-style: none;
+    margin: 1.5rem 0 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+    gap: 1.25rem;
+  }
+
+  .logros a {
+    display: block;
+    background: var(--blanco);
+    border-radius: var(--radio);
+    overflow: hidden;
+    box-shadow: var(--sombra);
+    text-decoration: none;
+    color: var(--texto);
+    height: 100%;
+    transition: transform 0.2s;
+  }
+
+  .logros a:hover {
+    transform: translateY(-4px);
+  }
+
+  .logros img {
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+    width: 100%;
+  }
+
+  .logros__periodo {
+    display: block;
+    padding: 0.9rem 1rem 0;
+    font-size: 0.85rem;
+    color: var(--selva);
+    font-weight: 700;
+  }
+
+  .logros strong {
+    display: block;
+    padding: 0.2rem 1rem 1rem;
+    font-size: 1.1rem;
+  }
+</style>

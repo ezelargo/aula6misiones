@@ -1,0 +1,107 @@
+---
+// Visor de fotos a pantalla completa para todas las <Galeria> de la página.
+// Sin JavaScript, cada miniatura abre la foto grande directamente.
+---
+
+<dialog class="visor" data-visor aria-label="Foto ampliada">
+  <img alt="" />
+  <button type="button" class="visor__cerrar" data-cerrar aria-label="Cerrar">×</button>
+  <button type="button" class="visor__nav visor__nav--ant" data-anterior aria-label="Foto anterior">‹</button>
+  <button type="button" class="visor__nav visor__nav--sig" data-siguiente aria-label="Foto siguiente">›</button>
+</dialog>
+
+<script>
+  const visor = document.querySelector<HTMLDialogElement>('[data-visor]');
+  if (visor) {
+    const img = visor.querySelector('img')!;
+    let enlaces: HTMLAnchorElement[] = [];
+    let actual = 0;
+
+    const mostrar = (i: number) => {
+      actual = (i + enlaces.length) % enlaces.length;
+      const a = enlaces[actual];
+      img.src = a.href;
+      img.alt = a.querySelector('img')?.alt ?? '';
+    };
+
+    document.querySelectorAll<HTMLElement>('[data-galeria]').forEach((galeria) => {
+      const propios = [...galeria.querySelectorAll<HTMLAnchorElement>('a[data-grande]')];
+      propios.forEach((a, i) =>
+        a.addEventListener('click', (e) => {
+          e.preventDefault();
+          enlaces = propios;
+          mostrar(i);
+          visor.showModal();
+        }),
+      );
+    });
+
+    visor.querySelector('[data-cerrar]')!.addEventListener('click', () => visor.close());
+    visor.querySelector('[data-anterior]')!.addEventListener('click', () => mostrar(actual - 1));
+    visor.querySelector('[data-siguiente]')!.addEventListener('click', () => mostrar(actual + 1));
+    visor.addEventListener('click', (e) => {
+      if (e.target === visor) visor.close();
+    });
+    document.addEventListener('keydown', (e) => {
+      if (!visor.open) return;
+      if (e.key === 'ArrowLeft') mostrar(actual - 1);
+      if (e.key === 'ArrowRight') mostrar(actual + 1);
+    });
+  }
+</script>
+
+<style>
+  .visor {
+    border: 0;
+    padding: 0;
+    background: transparent;
+    max-width: 100vw;
+    max-height: 100vh;
+    overflow: visible;
+  }
+
+  .visor::backdrop {
+    background: rgb(0 0 0 / 0.88);
+  }
+
+  .visor img {
+    max-width: 92vw;
+    max-height: 88vh;
+    border-radius: 8px;
+  }
+
+  .visor button {
+    position: fixed;
+    background: rgb(255 255 255 / 0.15);
+    color: #fff;
+    border: 0;
+    font-size: 2rem;
+    line-height: 1;
+    width: 3rem;
+    height: 3rem;
+    border-radius: 50%;
+    cursor: pointer;
+  }
+
+  .visor button:hover {
+    background: rgb(255 255 255 / 0.3);
+  }
+
+  .visor__cerrar {
+    top: 1rem;
+    right: 1rem;
+  }
+
+  .visor__nav {
+    top: 50%;
+    transform: translateY(-50%);
+  }
+
+  .visor__nav--ant {
+    left: 1rem;
+  }
+
+  .visor__nav--sig {
+    right: 1rem;
+  }
+</style>

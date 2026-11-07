@@ -1,0 +1,308 @@
+/* Paleta inspirada en Misiones: tierra colorada, selva y cielo */
+:root {
+  --tierra: #b4472a;
+  --tierra-oscura: #8c3420;
+  --selva: #2f6b3f;
+  --selva-clara: #e6f0e8;
+  --cielo: #3d7fb8;
+  --crema: #fbf7f1;
+  --arena: #f3eadd;
+  --texto: #2a2522;
+  --texto-suave: #5f5650;
+  --borde: #e5dccf;
+  --blanco: #ffffff;
+  --radio: 14px;
+  --sombra: 0 6px 24px rgb(60 40 20 / 0.08);
+  --ancho: 1120px;
+  --fuente: 'Segoe UI', system-ui, -apple-system, Roboto, 'Helvetica Neue', Arial, sans-serif;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: var(--fuente);
+  font-size: 1.0625rem;
+  line-height: 1.65;
+  color: var(--texto);
+  background: var(--crema);
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+a {
+  color: var(--tierra);
+}
+
+a:hover {
+  color: var(--tierra-oscura);
+}
+
+h1,
+h2,
+h3 {
+  line-height: 1.2;
+  color: var(--texto);
+}
+
+h2 {
+  font-size: clamp(1.6rem, 3vw, 2.2rem);
+  margin: 0 0 1rem;
+}
+
+h3 {
+  font-size: 1.3rem;
+}
+
+.contenedor {
+  width: 100%;
+  max-width: var(--ancho);
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+.saltar {
+  position: absolute;
+  left: -999px;
+}
+
+.saltar:focus {
+  left: 1rem;
+  top: 1rem;
+  z-index: 100;
+  background: var(--blanco);
+  padding: 0.5rem 1rem;
+}
+
+/* ---------- Cabecera ---------- */
+.cabecera {
+  background: var(--blanco);
+  border-bottom: 1px solid var(--borde);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.cabecera__fila {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+  padding-top: 0.6rem;
+  padding-bottom: 0.6rem;
+}
+
+.marca {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  text-decoration: none;
+  color: var(--texto);
+}
+
+.marca__numero {
+  display: grid;
+  place-items: center;
+  width: 2.4rem;
+  height: 2.4rem;
+  border-radius: 50%;
+  background: var(--tierra);
+  color: var(--blanco);
+  font-weight: 800;
+  font-size: 1.3rem;
+}
+
+.marca__texto {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.15;
+}
+
+.marca__texto small {
+  color: var(--texto-suave);
+}
+
+.menu {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem;
+  margin: 0;
+  padding: 0;
+}
+
+.menu a {
+  display: block;
+  padding: 0.4rem 0.75rem;
+  border-radius: 999px;
+  text-decoration: none;
+  color: var(--texto);
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+.menu a:hover {
+  background: var(--arena);
+}
+
+.menu a[aria-current='page'] {
+  background: var(--tierra);
+  color: var(--blanco);
+}
+
+/* ---------- Secciones ---------- */
+.seccion {
+  padding: 4rem 0;
+}
+
+.seccion--arena {
+  background: var(--arena);
+}
+
+.seccion--selva {
+  background: var(--selva);
+  color: var(--blanco);
+}
+
+.seccion--selva h2,
+.seccion--selva a {
+  color: var(--blanco);
+}
+
+.etiqueta {
+  display: inline-block;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--selva);
+  margin-bottom: 0.5rem;
+}
+
+.dos-columnas {
+  display: grid;
+  gap: 2.5rem;
+  align-items: center;
+}
+
+@media (min-width: 820px) {
+  .dos-columnas {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.foto-redondeada {
+  border-radius: var(--radio);
+  box-shadow: var(--sombra);
+  width: 100%;
+  object-fit: cover;
+}
+
+.texto-markdown ul {
+  padding-left: 1.2rem;
+}
+
+.texto-markdown li {
+  margin-bottom: 0.35rem;
+}
+
+.texto-markdown li:has(> input[type='checkbox']) {
+  list-style: none;
+  margin-left: -1.2rem;
+}
+
+/* ---------- Botones ---------- */
+.botones {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 1.5rem;
+}
+
+.boton {
+  display: inline-block;
+  padding: 0.75rem 1.4rem;
+  border-radius: 999px;
+  background: var(--tierra);
+  color: var(--blanco);
+  font-weight: 700;
+  text-decoration: none;
+  border: 2px solid var(--tierra);
+}
+
+.boton:hover {
+  background: var(--tierra-oscura);
+  border-color: var(--tierra-oscura);
+  color: var(--blanco);
+}
+
+.boton--claro {
+  background: transparent;
+  color: var(--blanco);
+  border-color: var(--blanco);
+}
+
+.boton--claro:hover {
+  background: var(--blanco);
+  color: var(--texto);
+  border-color: var(--blanco);
+}
+
+/* ---------- Encabezado de página interna ---------- */
+.encabezado-pagina {
+  background: var(--tierra);
+  color: var(--blanco);
+  padding: 3rem 0;
+}
+
+.encabezado-pagina h1 {
+  color: var(--blanco);
+  margin: 0 0 0.5rem;
+  font-size: clamp(2rem, 4vw, 2.8rem);
+}
+
+.encabezado-pagina p {
+  margin: 0;
+  max-width: 60ch;
+  opacity: 0.95;
+}
+
+/* ---------- Pie ---------- */
+.pie {
+  background: #231f1c;
+  color: #d9d0c7;
+  padding: 2.5rem 0;
+  font-size: 0.95rem;
+}
+
+.pie a {
+  color: #f2c6a8;
+}
+
+.pie__fila {
+  display: grid;
+  gap: 1.5rem;
+}
+
+@media (min-width: 820px) {
+  .pie__fila {
+    grid-template-columns: 2fr 1fr;
+  }
+}
+
+.pie p {
+  margin: 0.3rem 0 0;
+}
