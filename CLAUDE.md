@@ -42,8 +42,13 @@ Origen del contenido: el Google Doc del proyecto (export `?format=txt` / `?forma
 1. `/.well-known/acme-challenge/` no se redirige (renovación del SSL).
 2. `http` o `www` → `https://aula6misiones.com.ar/...` con **301**, en un solo salto, conservando ruta y query.
 
-(En `main`, mientras el sitio no esté publicado, existe además la regla raíz `/` → Google Doc con **302**
-y un `index.php` de respaldo. Al publicar el sitio se eliminan.)
+Además en `web.config`:
+- Caché: páginas 5 min; `/_astro/` 1 año (los nombres llevan hash).
+- MIME `.webp` registrado (**IIS no lo trae**: sin esto todas las imágenes dan 404).
+- 404 propia con `responseMode="File"` y ruta relativa (`ExecuteURL` devolvía código 200).
+
+Antes de agregar secciones nuevas al `web.config`, probarlas en una carpeta aislada del
+servidor (ej. `/_prueba-x/web.config`): una sección bloqueada por el hosting tira 500 en todo el sitio.
 
 ## Flujo de trabajo y deploy
 
@@ -54,7 +59,10 @@ ni pedirle al usuario pasos manuales.
 2. Build en Docker y revisar la vista previa.
 3. Commit y push.
 4. Al publicar: subir el contenido de `dist/` a la raíz `/` del hosting con el MCP `ftp-aula6misiones`.
-5. Verificar con `curl -I` las variantes (`http`, `https`, con y sin `www`) y las páginas.
+   Orden: primero `/_astro/` (son muchos archivos: delegar a un subagente), después páginas
+   internas, y al final `index.html` y `web.config`. Los archivos viejos de `/_astro/` se pueden limpiar después.
+5. Verificar con `curl` las variantes (`http`, `https`, con y sin `www`), las páginas y que
+   todos los recursos `/_astro/` referenciados respondan 200.
 
 En el servidor **no borrar `/.well-known/`**.
 
