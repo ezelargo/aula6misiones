@@ -1,0 +1,36 @@
+name: Deploy a producción
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+# Evita dos deploys en paralelo pisándose
+concurrency:
+  group: deploy-produccion
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      # Fase 2 (Astro): acá irán setup-node + npm ci + npm run build,
+      # y local-dir pasará a ser ./dist/
+
+      - name: Subir por FTP
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          local-dir: ./public/
+          server-dir: ./
+          # Solo borra en el servidor lo que este mismo deploy subió antes;
+          # igual excluimos explícitamente la carpeta de Let's Encrypt.
+          exclude: |
+            **/.git*
+            **/.git*/**
+            .well-known/**

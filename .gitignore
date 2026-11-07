@@ -1,0 +1,16 @@
+# Dependencias y build (fase 2: Astro)
+node_modules/
+dist/
+.astro/
+
+# Secretos y configuración local — NUNCA commitear credenciales
+.env
+.env.*
+.mcp.json
+.claude/settings.local.json
+
+# Sistema operativo / editores
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
