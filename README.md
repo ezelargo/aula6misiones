@@ -13,21 +13,17 @@ para que cualquier voluntario pueda editarlo desde GitHub.
 ## Estructura
 
 ```
-.github/workflows/deploy.yml   Deploy automático por FTP al hacer push a main
 public/                        Archivos que se suben tal cual al servidor
   web.config                   Redirecciones (https, sin www, raíz → Google Doc)
   index.php                    Respaldo de las redirecciones si falla web.config
 ```
 
-Fase 2: se agrega `src/` con el sitio en Astro; el workflow compila y sube `dist/`.
+Fase 2: se agrega `src/` con el sitio en Astro; se compila y se sube `dist/`.
 
 ## Deploy
 
-Cada push a `main` sube el contenido de `public/` al hosting (IIS) por FTP.
-También se puede lanzar a mano desde la pestaña **Actions → Deploy a producción → Run workflow**.
-
-Las credenciales están en los secrets del repositorio (`FTP_SERVER`, `FTP_USERNAME`,
-`FTP_PASSWORD`). **Nunca** commitear credenciales.
+El contenido de `public/` se sube por FTP a la raíz del hosting (IIS).
+**Nunca** commitear credenciales.
 
 No borrar `.well-known/` en el servidor: Let's Encrypt lo usa para renovar el certificado SSL.
 
