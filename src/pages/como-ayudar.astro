@@ -26,12 +26,15 @@ import Texto from '../components/Texto.astro';
     <div class="contenedor" style="max-width: 760px; text-align: center">
       <h2>¿Querés colaborar?</h2>
       <p>
-        Escribinos para coordinar una donación o sumarte como padrino. Te contamos qué es lo
-        más urgente y cómo hacer llegar tu aporte al aula.
+        Las donaciones y el padrinazgo se coordinan a través de <strong>APAER</strong>, la
+        asociación que acompaña a escuelas rurales de todo el país y con la que trabajamos desde 2019.
+      </p>
+      <p class="aviso">
+        Al contactarlos, mencioná que querés colaborar con el<br />
+        <strong>Aula Satélite N° 6 de la Escuela N° 120 · El Soberbio, Misiones</strong>.
       </p>
       <div class="botones" style="justify-content: center">
-        <a class="boton boton--claro" href="https://www.linkedin.com/in/ezelargo/">Contactar por LinkedIn</a>
-        <a class="boton boton--claro" href="https://apaer.org.ar/">Conocer APAER</a>
+        <a class="boton boton--claro" href="https://apaer.org.ar/">Contactar a APAER</a>
       </div>
     </div>
   </section>
@@ -44,5 +47,13 @@ import Texto from '../components/Texto.astro';
     box-shadow: var(--sombra);
     padding: 1.75rem;
     height: 100%;
+  }
+
+  .aviso {
+    background: rgb(255 255 255 / 0.12);
+    border: 1px solid rgb(255 255 255 / 0.35);
+    border-radius: var(--radio);
+    padding: 1rem 1.25rem;
+    margin: 1.5rem 0 0;
   }
 </style>
