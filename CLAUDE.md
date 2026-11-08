@@ -25,8 +25,9 @@ src/content/textos/*.md     Textos sueltos (introduccion, maestra, necesidades, 
 src/assets/fotos/<carpeta>/ Fotos NN.jpg (máx. 1600 px, sin EXIF); la carpeta se referencia en `galeria:`
 src/components/             Galeria, Visor (lightbox único en el layout), Video (youtube-nocookie), Texto
 src/layouts/Base.astro      Cabecera, menú, pie
-src/pages/                  index, historia, como-ayudar, agradecimientos, 404
-public/                     Se copia tal cual a dist/ (web.config, favicon.svg)
+src/pages/                  index, historia, como-ayudar, agradecimientos, 404, sitemap.xml.ts (sitemap sin plugins)
+public/                     Se copia tal cual a dist/ (web.config, robots.txt, favicon.svg/-48.png,
+                            apple-touch-icon.png, og.jpg = imagen 1200x630 para compartir)
 ```
 
 Origen del contenido: el Google Doc del proyecto (export `?format=txt` / `?format=zip`).
