@@ -113,16 +113,10 @@ h3 {
   color: var(--texto);
 }
 
-.marca__numero {
-  display: grid;
-  place-items: center;
-  width: 2.4rem;
-  height: 2.4rem;
-  border-radius: 50%;
-  background: var(--tierra);
-  color: var(--blanco);
-  font-weight: 800;
-  font-size: 1.3rem;
+.marca__logo {
+  width: 2.6rem;
+  height: 2.6rem;
+  flex: none;
 }
 
 .marca__texto {

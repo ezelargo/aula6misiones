@@ -1,1 +1,8 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><circle cx="32" cy="32" r="32" fill="#b4472a"/><text x="32" y="45" font-family="Segoe UI,Arial,sans-serif" font-size="38" font-weight="800" fill="#fff" text-anchor="middle">6</text></svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <!-- Escuelita rural (tierra colorada) + hoja de selva (verde) -->
+  <path d="M4 32 L28 12 L52 32" fill="none" stroke="#b4472a" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M10 31 V56 H46 V31" fill="#b4472a"/>
+  <rect x="23" y="40" width="10" height="16" rx="1.5" fill="#fbf7f1"/>
+  <path d="M60 6 C42 6 36 18 40 34 C54 32 62 22 60 6 Z" fill="#2f6b3f"/>
+  <path d="M58 9 C50 16 45 24 41 32" fill="none" stroke="#e6f0e8" stroke-width="2" stroke-linecap="round"/>
+</svg>
